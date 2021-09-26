@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from translate import get
 
 app = Flask(__name__)
 
@@ -14,12 +15,9 @@ def magic(s):
 
 @app.route("/dict", methods=["post"])
 def process():
-    user = None
-    if request.method == 'POST':
-        print("1111111111111111111")
-        user = {'fname': magic(request.form.get('userfname')),
-                'lname': magic(request.form.get('userlname'))}
-    return render_template('index.html', user=user)
+    print(request.form.get('action'))
+    return render_template('index.html', source=request.form.get('textarea'),
+                           result=get(request.form.get('textarea'), request.form.get('action')))
 
 
 if __name__ == "__main__":

@@ -5,6 +5,7 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="/static/bootstrap.min.css"/>
     <link rel="stylesheet" href="/static/form.css"/>
+    <title>Translator</title>
 </head>
 
 <body>
@@ -18,28 +19,39 @@
     </div>
 </nav>
 
-{%  if user %}
+<!--{%  if user %}
 <div class="bs-component">
               <div class="alert alert-dismissible alert-success">
                 <strong>Well done!</strong> You successfully login as {{ user.fname }} {{ user.lname }}.
               </div>
-{% endif %}
+{% endif %}-->
 <div class="wrapper">
-    <form class="card border-primary mb-3 myform" action="/dict" method="post">
-        <h3 class="card-header">Please login</h3>
+    <form class="card border-primary mb-3 myform" action="/" method="post">
+        <h3 class="card-header">Translate</h3>
         <div class="card-body">
-            <input type="text" class="form-control" name="userfname" placeholder="Your first name" required=""
-                   autofocus=""/>
-            <input type="text" class="form-control" name="userlname" placeholder="Your last name" required=""
-                   autofocus=""/>
+            <textarea name="textarea" class="form-control">{{ data.source }}</textarea>
             <!--<h4 class="card-title">Primary card title</h4>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
                 content.</p> -->
         </div>
-        <div class="confirm">
-            <button class="btn btn-lg btn-primary" type="submit">Login</button>
+        <div class="twobutton">
+            <div class="confirm">
+                <button class="btn btn-lg btn-primary" type="submit" name="action" value="ru">To RU</button>
+            </div>
+            <div class="confirm">
+                <button class="btn btn-lg btn-primary" type="submit" name="action" value="en">To EN</button>
+            </div>
         </div>
     </form>
+    <div class="card border-primary mb-3 myform">
+        <h3 class="card-header">Result</h3>
+        <div class="card-body">
+            <textarea name="result_area" class="form-control">{{ data.result }}</textarea>
+            <!--<h4 class="card-title">Primary card title</h4>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p> -->
+        </div>
+    </div>
 </div>
 </body>
 

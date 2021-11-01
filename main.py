@@ -6,9 +6,15 @@ app = Flask(__name__)
 
 @app.route("/", methods=["post", "get"])
 def process():
-    return render_template('index.html',
-                           data=get(request.form.get('textarea', ''),
-                                    request.form.get('action', '')))
+    r = get(request.form.get("textarea", ""), request.form.get("action", ""))
+    if "json" in request.form:
+        return {"result": r["result"]}
+    return render_template("index.html", data=r)
+
+
+@app.route("/api", methods=["post"])
+def api():
+    return {"result": get(request.form.get("textarea", ""), request.form.get("action", ""))["result"]}
 
 
 if __name__ == "__main__":
